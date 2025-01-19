@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView
 from .models import Customer
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class CustomerList(ListView):
+class CustomerList(LoginRequiredMixin, ListView):
     model = Customer
     template_name = 'sora/customer_list.html'  # テンプレートのパス
     context_object_name = 'customers'  # テンプレート内で使用する変数名
@@ -24,7 +25,7 @@ class CustomerList(ListView):
         context['sort_by'] = self.request.GET.get('sort_by', 'id')  # 現在のソート条件
         return context
     
-class DetailCustomer(DetailView):
+class DetailCustomer(LoginRequiredMixin, DetailView):
     model = Customer
     template_name = 'sora/detail_customer.html'
 
