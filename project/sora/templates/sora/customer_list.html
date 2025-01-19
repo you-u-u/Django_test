@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧客一覧</title>
+</head>
+<body>
+    <h1>顧客一覧</h1>
+
+    <!-- 一覧テーブル -->
+    <table border="2">
+        <thead>
+            <tr>
+                <!-- ID列（ソートリンク付き） -->
+                <th>
+                    ID
+                    <a href="?sort_by=id">▲</a>
+                    <a href="?sort_by=-id">▼</a>
+                </th>
+
+                <!-- 氏名カナ列（ソートリンク付き） -->
+                <th>
+                    氏名カナ
+                    <a href="?sort_by=last_name_kana">▲</a>
+                    <a href="?sort_by=-last_name_kana">▼</a>
+                </th>
+
+                <!-- 他のカラム -->
+                <th>氏名</th>
+                <th>住所</th>
+                <th>電話番号</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 顧客データの繰り返し -->
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.full_name_kana }}</td>
+                    <td>{{ customer.full_name }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.phone_number }}</td>
+                    <p>{% url 'sora:detail_customer' customer.id %}</p>
+                    <td><a href="{% url 'sora:detail_customer' customer.pk %}">詳細</a></td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- ページネーション -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if customers.has_previous %}
+                <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page=1">最初</a>
+                <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page={{ customers.previous_page_number }}">前</a>
+            {% endif %}
+
+            <span class="current">
+                {{ customers.number }} / {{ customers.paginator.num_pages }}
+            </span>
+
+            {% if customers.has_next %}
+                <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page={{ customers.next_page_number }}">次</a>
+                <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page={{ customers.paginator.num_pages }}">最後</a>
+            {% endif %}
+        </span>
+    </div>
+</body>
+</html>

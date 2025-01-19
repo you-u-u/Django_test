@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Customer</title>
+</head>
+<body>
+    <h1>顧客詳細</h1>
+    <p><strong>顧客番号:</strong> {{ customer.id }}</p>
+    <p><strong>氏名:</strong> {{ customer.full_name }}</p>
+    <p><strong>カナ:</strong> {{ customer.full_name_kana }}</p>
+    <p><strong>住所:</strong> {{ customer.address }}</p>
+    <p><strong>電話番号:</strong> {{ customer.phone_number }}</p>
+    <p><strong>Email:</strong> {{ customer.email }}</p>
+    <h2>購入履歴</h2>
+    <ul>
+        {% for history in customer.purchase_history.all %}
+            <li>{{ history.pc_model }} - {{ history.purchase_date }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'sora:index' %}">一覧へ戻る</a>
+</body>
+</html>
