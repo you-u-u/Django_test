@@ -1,0 +1,15 @@
+<h2>新規登録</h2>
+<form method="post">
+  {% csrf_token %}
+  {% for feild in form %}
+    <div>
+      {{ feild.label_tag }}<br>
+      {{ feild }}
+    </div>
+    {% for error in feild.errors %}
+      <p style="color:red">{{ error }}</p>
+    {% endfor %}
+  {% endfor %}
+
+  <input type="submit" values="Sign up">
+</form>
