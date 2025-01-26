@@ -8,18 +8,31 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Customer',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('first_name', models.CharField(max_length=100)),
                 ('last_name', models.CharField(max_length=100)),
-                ('first_name_kana', models.CharField(blank=True, max_length=100)),
-                ('last_name_kana', models.CharField(blank=True, max_length=100)),
+                (
+                    'first_name_kana',
+                    models.CharField(blank=True, max_length=100),
+                ),
+                (
+                    'last_name_kana',
+                    models.CharField(blank=True, max_length=100),
+                ),
                 ('address', models.CharField(max_length=255)),
                 ('phone_number', models.CharField(max_length=15)),
                 ('email', models.EmailField(max_length=254, unique=True)),
@@ -28,10 +41,25 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PurchaseHistory',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('pc_model', models.CharField(max_length=100)),
                 ('purchase_date', models.DateField()),
-                ('customer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='purchase_history', to='sora.customer')),
+                (
+                    'customer',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='purchase_history',
+                        to='sora.customer',
+                    ),
+                ),
             ],
         ),
     ]
