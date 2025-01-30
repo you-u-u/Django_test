@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Customer</title>
+    <style>
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>顧客詳細</h1>
@@ -15,11 +22,16 @@
     <p><strong>Email:</strong> {{ customer.email }}</p>
     <h2>購入履歴</h2>
     <ul>
-        {% for history in customer.purchase_history.all %}
-            <li>{{ history.pc_model }} - {{ history.purchase_date }}</li>
-        {% endfor %}
+        {% if customer.purchase_history.exist %}
+            {% for history in customer.purchase_history.all %}
+                <li>{{ history.pc_model }} - {{ history.purchase_date }}</li>
+            {% endfor %}
+        {% else %}
+            <p>購入履歴がありません</p>
+        {% endif %}
     </ul>
+    <button class="no-print" onclick="window.print()">印刷</button>
 
-    <a href="{% url 'sora:index' %}">一覧へ戻る</a>
+    <button class="no-print"><a href="{% url 'sora:index' %}">一覧へ戻る</a></button>
 </body>
 </html>

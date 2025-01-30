@@ -35,7 +35,6 @@
                 <td>{{ customer.full_name }}</td>
                 <td>{{ customer.address }}</td>
                 <td>{{ customer.phone_number }}</td>
-                <p>{% url 'sora:detail_customer' customer.id %}</p>
                 <td><a href="{% url 'sora:detail_customer' customer.pk %}">詳細</a></td>
 
             </tr>
@@ -51,16 +50,14 @@
             <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page={{ customers.previous_page_number }}">前</a>
         {% endif %}
 
-        <span class="current">
-            {{ customers.number }} / {{ customers.paginator.num_pages }}
-        </span>
-
         {% if customers.has_next %}
             <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page={{ customers.next_page_number }}">次</a>
             <a href="?{% if sort_by %}sort_by={{ sort_by }}&{% endif %}page={{ customers.paginator.num_pages }}">最後</a>
         {% endif %}
     </span>
 </div>
+
+<button><a href="{% url 'sora:create' %}">新規作成</a></button>
 
 <form action="{% url 'accounts:logout' %}" method="POST" style="display:inline;">
     {% csrf_token %}
