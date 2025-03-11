@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CustomerList, DetailCustomer, CreateCustomer
+from .views import CustomerList, DetailCustomer, CreateCustomer, UpdateCustomer, DeleteCustomer
 
 app_name = 'sora'
 
@@ -11,4 +11,7 @@ urlpatterns = [
         name='detail_customer',
     ),
     path('customer/create/', CreateCustomer.as_view(), name='create'),
+    path('customer/<int:pk>/update/', UpdateCustomer.as_view(), name='update'),
+    path('customer/<int:pk>/delete/', DeleteCustomer.as_view(), name='delete'),
+
 ]

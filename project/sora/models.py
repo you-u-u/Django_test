@@ -20,7 +20,7 @@ class Customer(models.Model):
         return f'{self.last_name_kana} {self.first_name_kana}'
 
     def __str__(self):
-        return f"{self.last_name} ({self.first_name})"
+        return f"{self.last_name} {self.first_name}"
 
 
 class PurchaseHistory(models.Model):
@@ -32,3 +32,4 @@ class PurchaseHistory(models.Model):
 
     def __str__(self):
         return f'{self.pc_model} ()'
+

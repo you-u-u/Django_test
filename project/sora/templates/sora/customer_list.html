@@ -1,6 +1,12 @@
 {% csrf_token %}
 <h1>顧客一覧</h1>
 
+<form action="index" method="get">
+    <label>名前：</label>
+    <input type="text" name="name">
+    <input type="submit" value="検索">
+</form>
+
 <!-- 一覧テーブル -->
 <table border="2">
     <thead>
